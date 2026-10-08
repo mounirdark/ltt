@@ -146,143 +146,810 @@ button:active{
 
 <script>
 
-const questions = [
-
-{ text:"Souhaites-tu devenir célèbre ?", category:"spark" },
-{ text:"De quelle manière aimerais-tu être célèbre ?", category:"spark" },
-{ text:"Avant d'appeler quelqu'un, répètes-tu parfois ce que tu vas dire ?", category:"spark" },
-{ text:"À quoi ressemblerait pour toi une journée parfaite ?", category:"flow" },
-{ text:"Quand as-tu chanté pour toi-même pour la dernière fois ?", category:"spark" },
-{ text:"Quand as-tu chanté devant quelqu'un pour la dernière fois ?", category:"spark" },
-{ text:"Si tu pouvais vivre jusqu'à 90 ans en gardant soit ton corps de tes 30 ans, soit ton esprit de tes 30 ans, que choisirais-tu ?", category:"depth" },
-{ text:"As-tu déjà un pressentiment sur la façon dont tu mourras ?", category:"raw" },
-{ text:"Quelles sont trois choses que nous semblons avoir en commun ?", category:"flow" },
-{ text:"Pour quoi ressens-tu le plus de gratitude dans ta vie ?", category:"flow" },
-{ text:"Si tu pouvais changer un aspect de ton éducation, que changerais-tu ?", category:"depth" },
-{ text:"Peux-tu raconter ton histoire de vie en quatre minutes ?", category:"depth" },
-{ text:"Si tu pouvais te réveiller demain avec une nouvelle qualité ou capacité, laquelle choisirais-tu ?", category:"flow" },
-{ text:"Si une boule de cristal pouvait te révéler une vérité sur ton avenir, voudrais-tu la connaître ?", category:"depth" },
-{ text:"Y a-t-il quelque chose que tu rêves de faire depuis longtemps ?", category:"flow" },
-{ text:"Pourquoi ne l'as-tu pas encore fait ?", category:"depth" },
-{ text:"Si quelqu’un te donnait assez d’argent pour créer une entreprise – sans conditions- quel genre d’entreprise créerais-tu et pour quelle raison ?", category:"depth" },
-{ text:"Si tu pouvais prendre une année sabbatique rémunérée, qu’est-ce que tu ferais ?", category:"depth" },
-{ text:"Quelle est ta plus grande réussite jusqu'à aujourd'hui ?", category:"flow" },
-{ text:"Qu'est-ce qui compte le plus dans une amitié ?", category:"flow" },
-{ text:"Quel est ton souvenir le plus précieux ?", category:"depth" },
-{ text:"Quel est ton souvenir le plus douloureux ?", category:"raw" },
-{ text:"Si tu apprenais qu'il ne te reste qu'un an à vivre, changerais-tu quelque chose à ta façon de vivre ?", category:"raw" },
-{ text:"Que signifie l'amour pour toi ?", category:"mirror" },
-{ text:"Quels rôles jouent l'amour et l'affection dans ta vie ?", category:"mirror" },
-{ text:"Comment aimes-tu être réconforté(e) lorsque tu es contrarié(e) ?", category:"mirror" },
-{ text:"Quelle qualité apprécies-tu le plus chez les autres ?", category:"flow" },
-{ text:"Quelle qualité apprécies-tu le plus chez toi ?", category:"flow" },
-{ text:"À quel point te sens-tu proche de ta famille ?", category:"depth" },
-{ text:"Penses-tu avoir eu une enfance plus heureuse que la moyenne ?", category:"depth" },
-{ text:"Comment décrirais-tu ta relation avec ta mère ?", category:"raw" },
-{ text:"Complète cette phrase : j'aimerais avoir quelqu'un avec qui partager…", category:"mirror" },
-{ text:"Si nous devenions proches, qu'aimerais-tu que je sache sur toi ?", category:"mirror" },
-{ text:"Qu'est-ce que tu apprécies déjà chez moi ?", category:"mirror" },
-{ text:"Quel est ton moment le plus embarrassant ?", category:"spark" },
-{ text:"Lors d’une journée “parfaite”, qu’est-ce que tu aimerais faire ?", category:"spark" },
-{ text:"Quand as-tu pleuré devant quelqu'un pour la dernière fois ?", category:"depth" },
-{ text:"Quand as-tu pleuré seul pour la dernière fois ?", category:"raw" },
-{ text:"Quelle chose trop sérieuse mériterait qu'on en rie davantage ?", category:"spark" },
-{ text:"Si tu mourais ce soir sans pouvoir parler à personne, quel regret aurais-tu ?", category:"raw" },
-{ text:"Qu'est-ce que tu n'as jamais osé dire à quelqu'un ?", category:"depth" },
-{ text:"Ta maison prend feu : quel objet sauverais-tu ?", category:"flow" },
-{ text:"Quelle perte te semblerait la plus difficile à supporter ?", category:"raw" },
-{ text:"Quel problème personnel aimerais-tu résoudre aujourd'hui ?", category:"depth" },
-{ text:"Si tu pouvais connaître la vérité absolue sur une seule question, laquelle choisirais-tu ?", category:"depth" },
-{ text:"Quelle peur influence aujourd'hui tes décisions sans que les autres le remarquent ?", category:"depth" },
-{ text:"Quel événement de ton enfance t'a le plus façonné ?", category:"raw" },
-{ text:"Quel trait de personnalité t'a aidé le plus dans la vie ?", category:"flow" },
-{ text:"Quel trait de personnalité t'a créé le plus de problèmes ?", category:"depth" },
-{ text:"Les gens changent-ils ou révèlent-ils qui ils sont ?", category:"depth" },
-{ text:"Quelle est la plus grande leçon que la douleur t'a apprise ?", category:"raw" },
-{ text:"Qu'est-ce qui te fait te sentir véritablement vivant ?", category:"flow" },
-{ text:"Qu'est-ce qui te fait perdre la notion du temps ?", category:"flow" },
-{ text:"À quoi accordes-tu trop d'importance actuellement ?", category:"depth" },
-{ text:"À quoi n'accordes-tu pas assez d'importance actuellement ?", category:"depth" },
-{ text:"Quel est le plus grand risque que tu aies pris ?", category:"flow" },
-{ text:"Quel est le risque que tu n'as jamais osé prendre ?", category:"depth" },
-{ text:"Quelle croyance avais-tu à 15 ans et que tu trouves fausse aujourd'hui ?", category:"depth" },
-{ text:"Quel jugement des autres a encore de l'impact sur toi ?", category:"depth" },
-{ text:"Si personne ne pouvait te critiquer, que ferais-tu différemment ?", category:"flow" },
-{ text:"Quelle personne a eu le plus d'influence sur ton identité ?", category:"depth" },
-{ text:"Quand te sens-tu le plus authentique ?", category:"flow" },
-{ text:"Quand te sens-tu obligé de jouer un rôle ?", category:"depth" },
-{ text:"Quel besoin émotionnel as-tu le plus de mal à exprimer ?", category:"depth" },
-{ text:"Quelle émotion as-tu appris à cacher ?", category:"raw" },
-{ text:"Quelle est la différence entre ce que tu montres et ce que tu ressens ?", category:"raw" },
-{ text:"Penses-tu que notre personnalité est façonnée par l'environnement ou la biologie ?", category:"depth" },
-{ text:"Quelle habitude aimerais-tu transmettre à tes enfants ?", category:"mirror" },
-{ text:"Qu'est-ce que tu ne voudrais jamais transmettre à tes enfants ?", category:"raw" },
-{ text:"À quoi ressemblerait une vie réussie selon toi ?", category:"mirror" },
-{ text:"Qu'est-ce qui te donne un sentiment de sécurité ?", category:"flow" },
-{ text:"À quel moment t'es-tu senti compris pour la dernière fois ?", category:"depth" },
-{ text:"Quand t'es-tu senti profondément seul pour la dernière fois ?", category:"raw" },
-{ text:"Qu'est-ce qui te fait te sentir aimé ?", category:"mirror" },
-{ text:"Qu'est-ce qui te fait te sentir rejeté ?", category:"mirror" },
-{ text:"Si ton meilleur ami décrivait ton défaut, que dirait-il ?", category:"depth" },
-{ text:"Si ton pire critique décrivait ta qualité, que dirait-il ?", category:"flow" },
-{ text:"Quelle erreur as-tu mis longtemps à te pardonner ?", category:"raw" },
-{ text:"Que signifie pour toi pardonner quelqu'un ?", category:"depth" },
-{ text:"Quelle injustice t'énerve le plus ?", category:"flow" },
-{ text:"Quel est ton plus grand moteur : la peur ou le désir ?", category:"depth" },
-{ text:"Dans quelles situations mens-tu le plus facilement ?", category:"raw" },
-{ text:"Quel aspect de toi les gens comprennent rarement ?", category:"depth" },
-{ text:"Qu'est-ce qui te fait te sentir respecté ?", category:"flow" },
-{ text:"Quel besoin est le plus important : liberté, sécurité, reconnaissance ou appartenance ?", category:"depth" },
-{ text:"Quand prends-tu les meilleures décisions : sous pression ou avec du temps ?", category:"flow" },
-{ text:"Quel comportement humain te fascine le plus ?", category:"flow" },
-{ text:"Si tu pouvais revivre une journée de ta vie, laquelle choisirais-tu ?", category:"depth" },
-{ text:"Qu'est-ce qui vaut la peine de souffrir pour toi ?", category:"raw" },
-{ text:"Quelle est la chose la plus courageuse que tu aies faite ?", category:"flow" },
-{ text:"À quel point ton passé influence-t-il ton présent ?", category:"depth" },
-{ text:"Quelle partie de toi cherches-tu encore à comprendre ?", category:"depth" },
-{ text:"Qu'est-ce qui te donne un sens dans la vie ?", category:"mirror" },
-{ text:"Quelle vérité sur toi as-tu découverte récemment ?", category:"depth" },
-{ text:"Quel conseil donnerais-tu à ton toi de 10 ans ?", category:"depth" },
-{ text:"Qu'aimerais-tu que les gens disent de toi après ta mort ?", category:"raw" },
-{ text:"Quelle est la question que tu aurais aimé qu'on te pose plus souvent ?", category:"depth" },
-{ text:"Quelles sont les activités qui te procurent le plus de plaisir pendant ton temps libre ?", category:"spark" },
-{ text:"Y a-t-il quelque chose de nouveau que tu as envie d'apprendre ou d'essayer ?", category:"flow" },
-{ text:"Quels sont les livres, la musique ou les films qui t'ont le plus influencé ?", category:"flow" },
-{ text:"Quels sont les principes ou les valeurs qui guident tes décisions importantes ?", category:"depth" },
-{ text:"Ton point de vue sur quelque chose d'important a-t-il changé au fil du temps ?", category:"depth" },
-{ text:"Quel est le défi que tu as relevé et qui t'a appris quelque chose de précieux ?", category:"flow" },
-{ text:"Comment prends-tu soin de toi en période de stress ?", category:"flow" },
-{ text:"Quel est le plaisir simple dont tu ne te lasses jamais ?", category:"spark" },
-{ text:"À quoi ressemblerait ta vie idéale dans cinq ans ?", category:"mirror" },
-{ text:"Quel est le moment où tu as réalisé que tu m'aimais vraiment, pas seulement que tu m'appréciais ?", category:"mirror" },
-{ text:"Y a-t-il quelque chose que tu aimerais me dire plus souvent, mais que tu retiens ?", category:"mirror" },
-{ text:"Dans quels moments te sens-tu le plus proche de moi ?", category:"mirror" },
-{ text:"Dans quels moments te sens-tu le plus éloigné de moi ?", category:"mirror" },
-{ text:"Est-ce qu'il y a quelque chose que j'ai dit ou fait qui t'a blessé ?", category:"mirror" },
-{ text:"Comment notre relation t'a-t-elle changé en tant que personne ?", category:"mirror" },
-{ text:"Y a-t-il un besoin que tu as dans cette relation et que tu n'as jamais exprimé clairement ?", category:"mirror" },
-{ text:"Quelle est la chose que tu voudrais avoir accompli à la fin de ta vie ?", category:"raw" },
-{ text:"Y a-t-il une version de toi-même que tu n'as pas encore osé être ?", category:"raw" },
-{ text:"Y a-t-il quelque chose que tu as vécu enfant que tu n'as jamais raconté ?", category:"raw" },
-{ text:"Ta peur la plus profonde, ce n'est pas les araignées : c'est quoi vraiment ?", category:"raw" },
-{ text:"Y a-t-il quelque chose en toi dont tu as longtemps eu honte ?", category:"raw" },
-{ text:"Est-ce qu'il y a quelque chose que tu fais pour éviter d'affronter une peur ?", category:"depth" },
-{ text:"Comment te décrirais-tu sans ton métier ni tes hobbies ?", category:"depth" },
-{ text:"Y a-t-il une période de ta vie dont tu parles peu ?", category:"raw" },
-{ text:"Comment réagis-tu quand tu es en colère ?", category:"depth" },
-{ text:"Est-ce que tu te pardonnes facilement ?", category:"depth" },
-{ text:"Y a-t-il quelqu'un à qui tu dois des excuses ?", category:"raw" },
-{ text:"Y a-t-il quelqu'un dont l'absence te pèse encore ?", category:"raw" },
-{ text:"Comment sais-tu que tu es vraiment en colère contre moi ?", category:"mirror" },
-{ text:"Te sens-tu libre de me dire les choses difficiles ?", category:"mirror" },
-{ text:"Qu'as-tu besoin d'entendre de moi quand tu traverses quelque chose de difficile ?", category:"mirror" },
-{ text:"Qu'est-ce que je fais qui compte vraiment pour toi ?", category:"mirror" },
-{ text:"Comment pourrais-je mieux t'aimer, concrètement ?", category:"mirror" },
-{ text:"Y a-t-il une expérience que tu veux absolument vivre avec moi ?", category:"mirror" },
-{ text:"Qu'attends-tu de moi dans les moments vraiment difficiles ?", category:"mirror" },
-{ text:"Quelle est la chose qui te plaît le plus chez moi ?", category:"mirror" },
-{ text:"Qu'est-ce que tu penses que je ne comprends pas encore vraiment de toi ?", category:"mirror" }
-
+const questions = 
+    
+    
+    [
+  {
+    "text": "Quel talent totalement inutile aimerais-tu maîtriser ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est ton avis le plus impopulaire sur la nourriture ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle petite chose suffit à te mettre de bonne humeur ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si ta vie était une série, quel en serait le titre ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle chanson connais-tu par cœur malgré toi ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est ton rituel bizarre quand personne ne te regarde ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle mode passée aimerais-tu voir revenir ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est le compliment le plus inattendu que tu aies reçu ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu ouvrais un restaurant, quel serait son plat signature ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle superstition suis-tu même sans y croire ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel personnage fictif serait ton colocataire idéal ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle odeur te ramène immédiatement à un souvenir ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est ton achat le plus absurde mais que tu assumes ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel jeu te rend beaucoup trop compétitif ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu pouvais échanger ta voix avec quelqu'un, qui choisirais-tu ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle activité d'enfant te plaît encore aujourd'hui ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle est la chose la plus spontanée que tu aies faite cette année ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel surnom te donneraient tes proches ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel aliment pourrais-tu manger trois jours de suite ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu avais une journée sans aucune conséquence, quelle folie ferais-tu ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle application de ton téléphone utilises-tu le plus ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est ton pire fou rire au mauvais moment ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est le cadeau le plus original que tu aies offert ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu devais organiser une fête à thème, lequel choisirais-tu ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle petite manie des autres te fait sourire ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est le mensonge innocent que tu racontais enfant ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle célébrité inviterais-tu à dîner uniquement pour discuter ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est le défi ridicule que tu accepterais de relever ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle expression utilises-tu beaucoup trop souvent ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu pouvais te téléporter pour déjeuner quelque part, où irais-tu ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel est ton souvenir de vacances le plus drôle ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel objet de ton quotidien a une histoire amusante ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle règle inventerais-tu pour une journée mondiale ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel métier testerais-tu juste pour une journée ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle est la dernière chose qui t'a surpris agréablement ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel film pourrais-tu revoir sans jamais t'ennuyer ?",
+    "category": "spark"
+  },
+  {
+    "text": "Si tu gagnais un voyage surprise, préférerais-tu mer, montagne ou grande ville ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle est ta façon préférée de célébrer une bonne nouvelle ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle tendance actuelle ne comprends-tu absolument pas ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quelle question insolite aimerais-tu qu'on te pose ?",
+    "category": "spark"
+  },
+  {
+    "text": "Quel endroit te donne immédiatement l'impression d'être chez toi ?",
+    "category": "flow"
+  },
+  {
+    "text": "À quoi ressemble ton dimanche idéal quand tu n'as aucune obligation ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel genre de conversation pourrais-tu avoir pendant des heures ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle compétence aimerais-tu développer dans les six prochains mois ?",
+    "category": "flow"
+  },
+  {
+    "text": "Qu'est-ce qui te motive à te lever les jours difficiles ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle tradition familiale aimerais-tu conserver ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel pays aimerais-tu découvrir autrement qu'en touriste ?",
+    "category": "flow"
+  },
+  {
+    "text": "Comment préfères-tu rencontrer de nouvelles personnes ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle activité aimerais-tu partager davantage avec tes proches ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel moment de la journée préfères-tu et pourquoi ?",
+    "category": "flow"
+  },
+  {
+    "text": "Comment sais-tu qu'une journée a été bien remplie ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel est ton rapport aux surprises ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle est ta manière préférée de décompresser après le travail ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel sujet as-tu découvert récemment et qui te passionne ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle place accordes-tu au silence dans ton quotidien ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel genre de personnes te met rapidement à l'aise ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel est le meilleur conseil pratique qu'on t'ait donné ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel endroit de ton enfance aimerais-tu revisiter ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle petite victoire récente t'a rendu fier ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel équilibre recherches-tu entre routine et aventure ?",
+    "category": "flow"
+  },
+  {
+    "text": "Comment choisis-tu les personnes à qui tu consacres ton temps ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle expérience culturelle t'a particulièrement marqué ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel plaisir aimerais-tu t'accorder plus régulièrement ?",
+    "category": "flow"
+  },
+  {
+    "text": "Qu'est-ce qui rend un repas mémorable pour toi ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle est ta façon préférée d'apprendre quelque chose ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel est ton rapport à l'argent au quotidien ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle saison te ressemble le plus ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle activité te permet de retrouver ton énergie ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle habitude récente a amélioré ta vie ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle décision simple a eu un grand effet sur ton quotidien ?",
+    "category": "flow"
+  },
+  {
+    "text": "Qu'est-ce qui te donne envie de découvrir une ville ?",
+    "category": "flow"
+  },
+  {
+    "text": "Comment aimes-tu organiser tes voyages ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle place occupent les animaux dans ta vie ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel est ton rapport aux réseaux sociaux ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel événement attends-tu avec impatience cette année ?",
+    "category": "flow"
+  },
+  {
+    "text": "Qu'est-ce qui te donne envie de faire confiance à quelqu'un ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quel type de projet aimerais-tu mener avec des amis ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle expérience aimerais-tu offrir à quelqu'un que tu aimes ?",
+    "category": "flow"
+  },
+  {
+    "text": "Comment imagines-tu ton lieu de vie idéal ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle chose aimerais-tu faire plus lentement dans ta vie ?",
+    "category": "flow"
+  },
+  {
+    "text": "Quelle valeur refuserais-tu de sacrifier même pour réussir ?",
+    "category": "depth"
+  },
+  {
+    "text": "À quel moment as-tu compris que tu avais grandi ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle contradiction chez toi essaies-tu d'accepter ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle décision a changé ta trajectoire sans que tu le prévoies ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui distingue pour toi la confiance de la naïveté ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quand as-tu dû choisir entre être apprécié et être fidèle à toi-même ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle part de ton identité as-tu construite loin du regard de ta famille ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle situation révèle le mieux ton caractère ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu envies parfois chez les autres ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel type de compliment as-tu du mal à croire ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel sacrifice as-tu fait et que tu referais sans hésiter ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle responsabilité as-tu acceptée trop tôt ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quand as-tu changé d'avis après avoir vraiment écouté quelqu'un ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu considères comme une forme de maturité émotionnelle ?",
+    "category": "depth"
+  },
+  {
+    "text": "Comment distingues-tu une intuition d'une peur ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle limite personnelle as-tu appris à poser ?",
+    "category": "depth"
+  },
+  {
+    "text": "Dans quelle situation as-tu découvert une force insoupçonnée ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle définition de la réussite as-tu abandonnée en grandissant ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle qualité admires-tu chez quelqu'un sans la posséder toi-même ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu aimerais mieux comprendre chez tes parents ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle conversation a changé ta manière de voir le monde ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quand as-tu ressenti le besoin de recommencer à zéro ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel compromis te semble acceptable et lequel ne l'est jamais ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui te pousse à remettre une décision importante à plus tard ?",
+    "category": "depth"
+  },
+  {
+    "text": "Comment réagis-tu lorsqu'on remet sincèrement tes convictions en question ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle promesse faite à toi-même essaies-tu encore de tenir ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui t'aide à rester humble quand tout va bien ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel échec t'a finalement ouvert une porte ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle part de ton quotidien reflète vraiment tes priorités ?",
+    "category": "depth"
+  },
+  {
+    "text": "Comment fais-tu la différence entre persévérer et t'obstiner ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle question morale te laisse encore hésitant ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu voudrais apprendre à accepter sans chercher à le contrôler ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel rôle joues-tu spontanément dans un groupe ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui te fait respecter profondément quelqu'un ?",
+    "category": "depth"
+  },
+  {
+    "text": "À quel moment as-tu compris qu'une relation devait évoluer ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle décision prendrais-tu si tu avais davantage confiance en toi ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu recherches vraiment derrière tes ambitions ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle habitude mentale aimerais-tu changer ?",
+    "category": "depth"
+  },
+  {
+    "text": "Comment réagis-tu lorsque quelqu'un réussit ce que tu souhaitais accomplir ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui te fait sentir en accord avec tes principes ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel souvenir te rappelle la personne que tu veux devenir ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle différence fais-tu entre être seul et être indépendant ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle leçon as-tu apprise en observant un couple autour de toi ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce que tu aimerais qu'on comprenne de ta façon de penser ?",
+    "category": "depth"
+  },
+  {
+    "text": "Comment reconnais-tu que tu as besoin d'aide ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quel sujet important évites-tu parfois par facilité ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle expérience t'a rendu plus tolérant ?",
+    "category": "depth"
+  },
+  {
+    "text": "À quoi reconnais-tu une personne réellement sage ?",
+    "category": "depth"
+  },
+  {
+    "text": "Quelle vérité difficile as-tu fini par accepter ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'aimerais-tu oser défendre davantage dans ta vie ?",
+    "category": "depth"
+  },
+  {
+    "text": "Qu'est-ce qui te donne envie de revoir quelqu'un après une première rencontre ?",
+    "category": "mirror"
+  },
+  {
+    "text": "À quoi reconnais-tu une complicité naissante ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle attention discrète te touche particulièrement ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle différence fais-tu entre attirance et attachement ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce qui te donne envie de t'ouvrir émotionnellement ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment préfères-tu qu'on te montre de l'intérêt au début d'une relation ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel geste quotidien symbolise l'amour à tes yeux ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel est pour toi le signe d'une relation équilibrée ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle place doit garder l'indépendance dans un couple ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment aimerais-tu résoudre un désaccord avec ton partenaire ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle conversation devrait avoir lieu avant de s'engager sérieusement ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel comportement te fait perdre confiance dans une relation ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce qui te fait te sentir choisi plutôt que simplement apprécié ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle importance accordes-tu aux projets communs ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment imagines-tu une soirée simple mais romantique ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'aimerais-tu construire à deux que tu ne construirais pas seul ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle différence fais-tu entre jalousie et protection ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelles limites te semblent essentielles dans une relation amoureuse ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment sais-tu que tu peux être pleinement toi-même avec quelqu'un ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle place accordes-tu aux amis quand tu es en couple ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'aimerais-tu que ton partenaire comprenne de tes moments de silence ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment exprimes-tu ton affection sans utiliser de mots ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel signe te montre qu'une personne est émotionnellement disponible ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle attitude rend une dispute constructive plutôt que destructrice ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment aimerais-tu être soutenu dans un projet ambitieux ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce qui te fait admirer davantage ton partenaire avec le temps ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle place le rire devrait-il avoir dans une histoire d'amour ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel type de souvenir aimerais-tu créer avec la personne que tu aimes ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle importance accordes-tu aux petites attentions par rapport aux grands gestes ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce que tu trouves romantique alors que d'autres le trouvent banal ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment aimerais-tu partager les responsabilités du quotidien à deux ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle vision de la famille aimerais-tu partager avec ton partenaire ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce qui te permet de te sentir en sécurité pendant un désaccord ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle différence fais-tu entre aimer quelqu'un et être compatible avec lui ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment aimerais-tu que l'on célèbre les réussites de chacun dans un couple ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quel sujet te semble indispensable à aborder avant de vivre ensemble ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle place donnerais-tu à la spiritualité ou aux convictions dans une relation ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Comment garderais-tu de la nouveauté dans une relation de longue durée ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Qu'est-ce que tu aimerais apprendre de la personne avec qui tu partageras ta vie ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle promesse réaliste aimerais-tu faire à la personne que tu aimes ?",
+    "category": "mirror"
+  },
+  {
+    "text": "Quelle blessure ancienne influence encore ta manière de faire confiance ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quel souvenir aimerais-tu pouvoir regarder sans ressentir de douleur ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quand as-tu eu l'impression de devoir être fort alors que tu ne l'étais pas ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle vérité sur ta famille as-tu eu du mal à accepter ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quel abandon, réel ou ressenti, t'a le plus marqué ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle peur te pousse parfois à éloigner les autres ?",
+    "category": "raw"
+  },
+  {
+    "text": "Y a-t-il une excuse que tu attends encore sans oser l'avouer ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle partie de ton histoire as-tu peur qu'on juge ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quand t'es-tu senti invisible auprès de personnes importantes pour toi ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle relation t'a appris quelque chose de douloureux sur toi-même ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle parole entendue autrefois te suit encore aujourd'hui ?",
+    "category": "raw"
+  },
+  {
+    "text": "Qu'as-tu perdu en essayant de répondre aux attentes des autres ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quel moment de ta vie aurais-tu voulu traverser accompagné ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle émotion te fait le plus peur quand elle devient intense ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle décision regrettes-tu sans savoir comment la réparer ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle limite as-tu laissé franchir par peur de perdre quelqu'un ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quand as-tu eu l'impression de te trahir toi-même ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle partie de ton passé aimerais-tu pouvoir raconter sans te justifier ?",
+    "category": "raw"
+  },
+  {
+    "text": "Qu'est-ce qui t'empêche parfois de demander de l'affection ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle absence a changé ta façon d'aimer les autres ?",
+    "category": "raw"
+  },
+  {
+    "text": "As-tu déjà eu peur que quelqu'un découvre qui tu es vraiment ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle attente envers toi-même t'épuise le plus ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quel événement a fragilisé ta confiance dans les autres ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle chose n'as-tu jamais réussi à dire à une personne importante ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle expérience t'a fait remettre en question ta propre valeur ?",
+    "category": "raw"
+  },
+  {
+    "text": "Qu'est-ce que tu redoutes le plus dans le fait de dépendre de quelqu'un ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quel souvenir te donne encore envie de demander pardon ?",
+    "category": "raw"
+  },
+  {
+    "text": "Quelle peur concernant ton avenir gardes-tu habituellement pour toi ?",
+    "category": "raw"
+  },
+  {
+    "text": "Qu'aimerais-tu déposer une bonne fois pour toutes, même si tu n'y arrives pas encore ?",
+    "category": "raw"
+  },
+  {
+    "text": "Si tu pouvais être entendu sans être interrompu ni jugé, de quoi parlerais-tu ?",
+    "category": "raw"
+  }
 ];
 
 let scores = {
